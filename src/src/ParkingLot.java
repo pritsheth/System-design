@@ -37,25 +37,30 @@ public class ParkingLot extends Observable{
 */
 
     public Integer parkCar(Car car) throws Exception {
-        if (isFull()) {
-           throw new Exception();
-        }
-         parkedCars.put(car.getregistrationNumber(),car);
+        checkIfSpaceIsAvailable();
+        parkedCars.put(car.getregistrationNumber(),car);
+        notifyListenersIfFull();
+        return car.getregistrationNumber();
+
+    }
+
+    private void notifyListenersIfFull() {
         if (isFull()) {
             setChanged();
             notifyObservers("Parking Lot Full");
         }
-        return car.getregistrationNumber();
+    }
 
+    private void checkIfSpaceIsAvailable() throws Exception {
+        if (isFull()) {
+           throw new Exception();
+        }
     }
 
 
     public Car unparkCar(Integer ticket) throws Exception {
 
-        if(isFull()){
-            setChanged();
-            notifyObservers("Parking Lot is now available");
-        }
+        notifyListenersIfSpaceAvailable();
 
         validate(ticket);
         Car car=parkedCars.get(ticket);
@@ -63,6 +68,13 @@ public class ParkingLot extends Observable{
 
         return car;
 
+    }
+
+    private void notifyListenersIfSpaceAvailable() {
+        if(isFull()){
+            setChanged();
+            notifyObservers("Parking Lot is now available");
+        }
     }
 
     public boolean isFull(){
