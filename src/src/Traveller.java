@@ -5,6 +5,7 @@ public class Traveller {
 
     private final int id;
     private final Car car;
+    private Integer ticket;
 
     public Traveller(int id,Car car) throws Exception {
 
@@ -27,7 +28,32 @@ public class Traveller {
     }
 
 
+    public Boolean parkMyCar(ParkingLot parkingLot) {
 
 
+        try {
+            this.ticket = parkingLot.parkCar(this.car);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+    }
+
+    public Car retrieveCar(ParkingLot parkingLot)  {
+
+        try {
+            return parkingLot.unparkCar(this.ticket);
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+            return null;
+
+        }
+
+
+    }
 
 }
