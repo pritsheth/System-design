@@ -7,9 +7,14 @@ public class Client {
 
 
         Car jaguar=new Car(1);
-        Traveller traveller=new Traveller(1,jaguar);
-        ParkingLot parkingLot=new ParkingLot(10);
+        Car audi=new Car(2);
+        ParkingLot parkingLot=new ParkingLot(1);
 
+        ParkingLotOwner owner=new ParkingLotOwner("ritesh");
+        parkingLot.addObserver(owner);
+
+        parkingLot.parkCar(jaguar);
+        parkingLot.parkCar(audi);
 
 
     }
