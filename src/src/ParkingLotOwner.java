@@ -6,7 +6,7 @@ public class ParkingLotOwner implements ParkingLotOwnerObserver {
 
     ParkingLotOwner(String name) throws Exception {
 
-        if(name==null){
+        if (name == null) {
             throw new Exception("Owner with No Name");
         }
         this.name = name;

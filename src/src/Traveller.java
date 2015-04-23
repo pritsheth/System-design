@@ -7,31 +7,36 @@ public class Traveller {
     private final Car car;
     private Integer ticket;
 
-    public Traveller(int id,Car car) throws Exception {
+    public Traveller(int id, Car car) throws Exception {
 
         validateTravellerId(id);
         validateCar(car);
-        this.id=id;
+        this.id = id;
         this.car = car;
     }
 
     private void validateCar(Car car) throws Exception {
-        if(car == null){
+        if (car == null) {
             throw new Exception("");
         }
     }
 
     private void validateTravellerId(int id) throws Exception {
-        if(id<=0){
+        if (id <= 0) {
             throw new Exception("Invalid Id");
         }
     }
 
 
-    public Boolean parkMyCar(ParkingLot parkingLot) {
+    public Boolean parkMyCar(ParkingAttendant parkingAttendant) {
 
 
         try {
+            ParkingLot parkingLot = parkingAttendant.findParkingLot();
+
+            if (parkingLot == null) {
+                throw new Exception("All ParkingLots are Full");
+            }
             this.ticket = parkingLot.parkCar(this.car);
             return true;
         } catch (Exception e) {
@@ -41,7 +46,7 @@ public class Traveller {
 
     }
 
-    public Car retrieveCar(ParkingLot parkingLot)  {
+    public Car retrieveCar(ParkingLot parkingLot) {
 
         try {
             return parkingLot.unParkCar(this.ticket);

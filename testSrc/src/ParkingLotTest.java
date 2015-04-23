@@ -61,6 +61,7 @@ public class ParkingLotTest {
         doNothing().when(parkingLotOwnerObserver).updateWhenParkingLotIsFull();
         parkingLot.attachParkingLotOwnerObserver(parkingLotOwnerObserver);
         parkingLot.parkCar(jaguar);
+
         verify(parkingLotOwnerObserver, times(1)).updateWhenParkingLotIsFull();
     }
 

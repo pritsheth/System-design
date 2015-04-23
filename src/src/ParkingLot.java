@@ -1,26 +1,28 @@
 import observers.FBIAgenetObserver;
 import observers.ParkingLotOwnerObserver;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ParkingLot {
 
-    private static final Float percent=0.8f;
+    private static final Float percent = 0.8f;
     private final int size;
-    private HashMap<Integer,Car> parkedCars;
+    private HashMap<Integer, Car> parkedCars;
     private List<ParkingLotOwnerObserver> parkingLotOwnerObservers;
     private List<FBIAgenetObserver> fbiAgenetObservers;
 
     public ParkingLot(int size) throws Exception {
         validateInput(size);
         this.size = size;
-        parkedCars=new HashMap<Integer, Car>();
+        parkedCars = new HashMap<Integer, Car>();
         parkingLotOwnerObservers = new ArrayList<ParkingLotOwnerObserver>();
         fbiAgenetObservers = new ArrayList<FBIAgenetObserver>();
     }
 
     private void validateInput(Integer size) throws Exception {
-        if (size == null ||  size <= 0) {
+        if (size == null || size <= 0) {
             throw new Exception("");
         }
     }
@@ -30,7 +32,7 @@ public class ParkingLot {
         parkedCars.put(car.getRegistrationNumber(), car);
         notifyFbiAgentIfParkingLotIs80PercentFull();
         notifyParkingLotOwnerIfSpaceIsFull();
-         return car.getRegistrationNumber();
+        return car.getRegistrationNumber();
     }
 
     public void attachParkingLotOwnerObserver(ParkingLotOwnerObserver parkingLotOwnerObserver) {
@@ -38,7 +40,7 @@ public class ParkingLot {
     }
 
     private void notifyFbiAgentIfParkingLotIs80PercentFull() {
-        if(this.size*percent<=parkedCars.size()) {
+        if (this.size * percent <= parkedCars.size()) {
             for (FBIAgenetObserver fbiAgenetObserver : fbiAgenetObservers) {
                 fbiAgenetObserver.updateWhenSpaceIs80PercentFull();
             }
@@ -55,7 +57,7 @@ public class ParkingLot {
 
     private void checkIfSpaceIsAvailable() throws Exception {
         if (isParkingSpaceFull()) {
-           throw new Exception();
+            throw new Exception();
         }
     }
 
@@ -64,7 +66,7 @@ public class ParkingLot {
 
         validateInput(ticket);
         notifyParkingLotOwnerIfSpaceIsAvailableAgain();
-        Car car=parkedCars.get(ticket);
+        Car car = parkedCars.get(ticket);
         parkedCars.remove(ticket);
 
         return car;
@@ -72,15 +74,15 @@ public class ParkingLot {
     }
 
     private void notifyParkingLotOwnerIfSpaceIsAvailableAgain() {
-        if(isParkingSpaceFull()){
+        if (isParkingSpaceFull()) {
             for (ParkingLotOwnerObserver parkingLotOwnerObserver : parkingLotOwnerObservers) {
                 parkingLotOwnerObserver.updateWhenParkingLotIsAvailable();
             }
         }
     }
 
-    public boolean isParkingSpaceFull(){
-        if(parkedCars.size()==this.size){
+    public boolean isParkingSpaceFull() {
+        if (parkedCars.size() == this.size) {
             return true;
         }
         return false;

@@ -1,6 +1,5 @@
-/**
- * Created by Jerry on 21-04-2015.
- */
+import exception.CarNotValidException;
+
 public class Car {
 
     private final int registrationNumber;
@@ -12,16 +11,15 @@ public class Car {
     }
 
     private void validateCarId(int registrationNumber) throws Exception {
-        if(registrationNumber<=0){
-            throw new Exception("Invalid registrationNumber");
+        if (registrationNumber <= 0) {
+            throw new CarNotValidException("Invalid registrationNumber");
         }
     }
 
 
-    public int getRegistrationNumber(){
+    public int getRegistrationNumber() {
         return this.registrationNumber;
     }
-
 
 
 }
