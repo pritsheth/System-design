@@ -1,3 +1,4 @@
+import exception.OwnerWithoutNameException;
 import observers.ParkingLotOwnerObserver;
 
 public class ParkingLotOwner implements ParkingLotOwnerObserver {
@@ -7,7 +8,7 @@ public class ParkingLotOwner implements ParkingLotOwnerObserver {
     ParkingLotOwner(String name) throws Exception {
 
         if (name == null) {
-            throw new Exception("Owner with No Name");
+            throw new OwnerWithoutNameException("Owner with No Name");
         }
         this.name = name;
     }

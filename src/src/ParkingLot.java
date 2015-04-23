@@ -1,3 +1,5 @@
+import exception.InvalidInputException;
+import exception.NoSpaceAvailableException;
 import observers.FBIAgenetObserver;
 import observers.ParkingLotOwnerObserver;
 
@@ -9,6 +11,8 @@ public class ParkingLot {
 
     private static final Float percent = 0.8f;
     private final int size;
+
+
     private HashMap<Integer, Car> parkedCars;
     private List<ParkingLotOwnerObserver> parkingLotOwnerObservers;
     private List<FBIAgenetObserver> fbiAgenetObservers;
@@ -21,9 +25,13 @@ public class ParkingLot {
         fbiAgenetObservers = new ArrayList<FBIAgenetObserver>();
     }
 
+
+
+
+
     private void validateInput(Integer size) throws Exception {
         if (size == null || size <= 0) {
-            throw new Exception("");
+            throw new InvalidInputException("Invalid Input");
         }
     }
 
@@ -57,7 +65,7 @@ public class ParkingLot {
 
     private void checkIfSpaceIsAvailable() throws Exception {
         if (isParkingSpaceFull()) {
-            throw new Exception();
+            throw new NoSpaceAvailableException("Parking Size is Full");
         }
     }
 
@@ -91,4 +99,10 @@ public class ParkingLot {
     public void attachFBIAgentObserver(FBIAgenetObserver fbiAgenetObserver) {
         fbiAgenetObservers.add(fbiAgenetObserver);
     }
+
+
+    public HashMap<Integer, Car> getParkedCars() {
+        return parkedCars;
+    }
+
 }

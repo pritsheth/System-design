@@ -1,6 +1,7 @@
-/**
- * Created by Jerry on 21-04-2015.
- */
+import exception.CarNotValidException;
+import exception.ParkingNotFoundException;
+import exception.TravellerNotValidException;
+
 public class Traveller {
 
     private final int id;
@@ -17,13 +18,13 @@ public class Traveller {
 
     private void validateCar(Car car) throws Exception {
         if (car == null) {
-            throw new Exception("");
+            throw new CarNotValidException("Car IS Not Found");
         }
     }
 
     private void validateTravellerId(int id) throws Exception {
         if (id <= 0) {
-            throw new Exception("Invalid Id");
+            throw new TravellerNotValidException("Invalid Id");
         }
     }
 
@@ -35,7 +36,7 @@ public class Traveller {
             ParkingLot parkingLot = parkingAttendant.findParkingLot();
 
             if (parkingLot == null) {
-                throw new Exception("All ParkingLots are Full");
+                throw new ParkingNotFoundException("All ParkingLots are Full");
             }
             this.ticket = parkingLot.parkCar(this.car);
             return true;

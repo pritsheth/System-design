@@ -1,6 +1,7 @@
 import exception.ParkingNotFoundException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ParkingAttendant {
@@ -24,5 +25,20 @@ public class ParkingAttendant {
         }
         return null;
     }
+
+    public Car findCarForParticularTicket(Integer ticket) throws Exception {
+
+        System.out.println("enter");
+        for (ParkingLot parkingLot : parkingLots) {
+            HashMap<Integer, Car> parkedCar= parkingLot.getParkedCars();
+            if(parkedCar.containsKey(ticket)) {
+                return parkingLot.unParkCar(ticket);
+            }
+        }
+        return null;
+        }
+
+
+
 }
 
