@@ -36,7 +36,7 @@ public class ParkingAttendantTest {
         parkingLots.add(parkingLotA);
         parkingLots.add(parkingLotB);
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner("amss");
-        parkingLotOwner.getIsFestiveSeason();
+        parkingLotOwner.updateParkingStrategy(new FestiveSeasonParkingStrategy());
         ParkingAttendant parkingAttendant = new ParkingAttendant(parkingLots);
         ParkingLot parkingLot = parkingAttendant.findParkingLot();
         assertEquals(parkingLot, parkingLotB);
@@ -71,18 +71,6 @@ public class ParkingAttendantTest {
        assertEquals(carA, car);
     }
 
-    @Test
-    public void testFindLotWithMaximumCapacity() throws Exception {
-            ParkingLot parkingLotA = new ParkingLot(2);
-            ParkingLot parkingLotB = new ParkingLot(4);
-            ArrayList<ParkingLot> parkingLots = new ArrayList<>();
-            parkingLots.add(parkingLotA);
-            parkingLots.add(parkingLotB);
-
-            ParkingAttendant parkingAttendant = new ParkingAttendant(parkingLots);
-            ParkingLot parkingLot = parkingAttendant.findParkingLotWithMaximumSize();
-            assertEquals(parkingLot, parkingLotB);
-        }
 
 
 

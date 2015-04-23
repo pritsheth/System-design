@@ -7,4 +7,6 @@ public class ParkingLotOwnerTest {
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner(null);
     }
 
+
+
 }

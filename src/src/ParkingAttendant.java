@@ -7,6 +7,8 @@ import java.util.List;
 public class ParkingAttendant {
 
     private List<ParkingLot> parkingLots;
+    private ParkingLotStrategy parkingLotStrategy;
+
 
     public ParkingAttendant(ArrayList<ParkingLot> parkingLots) throws Exception {
         if (parkingLots == null) {
@@ -16,16 +18,12 @@ public class ParkingAttendant {
     }
 
     public ParkingLot findParkingLot() {
-
-        for (ParkingLot parkingLot : parkingLots) {
-            if (!parkingLot.isParkingSpaceFull()) {
-                return parkingLot;
-            }
-        }
-        return null;
+        return parkingLotStrategy.findParkingLot(parkingLots);
     }
 
-
+    public void setParkingLotStrategy(ParkingLotStrategy parkingLotStrategy) {
+        this.parkingLotStrategy = parkingLotStrategy;
+    }
 
     public Car findCarForParticularTicket(Integer ticket) throws Exception {
 
@@ -40,7 +38,7 @@ public class ParkingAttendant {
         }
 
 
-    public ParkingLot findParkingLotWithMaximumSize() {
+    private ParkingLot findParkingLotWithMaximumSize() {
         Integer maximum=Integer.MIN_VALUE;
         ParkingLot parkingLotResult=null;
         for (ParkingLot parkingLot : parkingLots) {
@@ -53,5 +51,7 @@ public class ParkingAttendant {
   return parkingLotResult;
 
     }
+
+
 }
 

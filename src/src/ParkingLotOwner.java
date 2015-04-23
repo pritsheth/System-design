@@ -4,6 +4,7 @@ import observers.ParkingLotOwnerObserver;
 public class ParkingLotOwner implements ParkingLotOwnerObserver {
 
     private final String name;
+private ParkingAttendant parkingAttendant;
 
     ParkingLotOwner(String name) throws Exception {
 
@@ -22,4 +23,15 @@ public class ParkingLotOwner implements ParkingLotOwnerObserver {
     public void updateWhenParkingLotIsAvailable() {
 
     }
+
+    public void setParkingAttendant(ParkingAttendant parkingAttendant) {
+        this.parkingAttendant = parkingAttendant;
+    }
+
+    public void updateParkingStrategy(ParkingLotStrategy parkingLotStrategy){
+        parkingAttendant.setParkingLotStrategy(parkingLotStrategy);
+    }
+
+
+
 }
