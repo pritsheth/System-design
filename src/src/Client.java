@@ -11,7 +11,6 @@ public class Client {
         ParkingLot parkingLot=new ParkingLot(1);
 
         ParkingLotOwner owner=new ParkingLotOwner("ritesh");
-        parkingLot.addObserver(owner);
 
         parkingLot.parkCar(jaguar);
         parkingLot.parkCar(audi);

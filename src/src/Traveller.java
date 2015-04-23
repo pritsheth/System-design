@@ -44,7 +44,7 @@ public class Traveller {
     public Car retrieveCar(ParkingLot parkingLot)  {
 
         try {
-            return parkingLot.unparkCar(this.ticket);
+            return parkingLot.unParkCar(this.ticket);
 
         } catch (Exception e) {
 

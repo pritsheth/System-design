@@ -1,68 +1,69 @@
+import observers.FBIAgenetObserver;
+import observers.ParkingLotOwnerObserver;
+
 import java.util.*;
 
-/**
- * Created by Jerry on 21-04-2015.
- */
-public class ParkingLot extends Observable{
+public class ParkingLot {
 
+    private static final Float percent=0.8f;
     private final int size;
-       private HashMap<Integer,Car> parkedCars;
+    private HashMap<Integer,Car> parkedCars;
+    private List<ParkingLotOwnerObserver> parkingLotOwnerObservers;
+    private List<FBIAgenetObserver> fbiAgenetObservers;
 
     public ParkingLot(int size) throws Exception {
-        validate(size);
-
+        validateInput(size);
         this.size = size;
         parkedCars=new HashMap<Integer, Car>();
+        parkingLotOwnerObservers = new ArrayList<ParkingLotOwnerObserver>();
+        fbiAgenetObservers = new ArrayList<FBIAgenetObserver>();
     }
 
-
-
-
-
-
-    private void validate(Integer size) throws Exception {
+    private void validateInput(Integer size) throws Exception {
         if (size == null ||  size <= 0) {
             throw new Exception("");
         }
     }
 
-   /* private void validateNull(Object... elements) throws Exception {
-       for (Object obj:elements){
-           if(obj==null){
-               throw new Exception("");
-           }
-       }
-
-    }
-*/
-
     public Integer parkCar(Car car) throws Exception {
         checkIfSpaceIsAvailable();
-        parkedCars.put(car.getregistrationNumber(),car);
-        notifyListenersIfFull();
-        return car.getregistrationNumber();
-
+        parkedCars.put(car.getRegistrationNumber(), car);
+        notifyFbiAgentIfParkingLotIs80PercentFull();
+        notifyParkingLotOwnerIfSpaceIsFull();
+         return car.getRegistrationNumber();
     }
 
-    private void notifyListenersIfFull() {
-        if (isFull()) {
-            setChanged();
-            notifyObservers("Parking Lot Full");
+    public void attachParkingLotOwnerObserver(ParkingLotOwnerObserver parkingLotOwnerObserver) {
+        parkingLotOwnerObservers.add(parkingLotOwnerObserver);
+    }
+
+    private void notifyFbiAgentIfParkingLotIs80PercentFull() {
+        if(this.size*percent<=parkedCars.size()) {
+            for (FBIAgenetObserver fbiAgenetObserver : fbiAgenetObservers) {
+                fbiAgenetObserver.updateWhenSpaceIs80PercentFull();
+            }
+        }
+    }
+
+    private void notifyParkingLotOwnerIfSpaceIsFull() {
+        if (isParkingSpaceFull()) {
+            for (ParkingLotOwnerObserver parkingLotOwnerObserver : parkingLotOwnerObservers) {
+                parkingLotOwnerObserver.updateWhenParkingLotIsFull();
+            }
         }
     }
 
     private void checkIfSpaceIsAvailable() throws Exception {
-        if (isFull()) {
+        if (isParkingSpaceFull()) {
            throw new Exception();
         }
     }
 
 
-    public Car unparkCar(Integer ticket) throws Exception {
+    public Car unParkCar(Integer ticket) throws Exception {
 
-        notifyListenersIfSpaceAvailable();
-
-        validate(ticket);
+        validateInput(ticket);
+        notifyParkingLotOwnerIfSpaceIsAvailableAgain();
         Car car=parkedCars.get(ticket);
         parkedCars.remove(ticket);
 
@@ -70,17 +71,22 @@ public class ParkingLot extends Observable{
 
     }
 
-    private void notifyListenersIfSpaceAvailable() {
-        if(isFull()){
-            setChanged();
-            notifyObservers("Parking Lot is now available");
+    private void notifyParkingLotOwnerIfSpaceIsAvailableAgain() {
+        if(isParkingSpaceFull()){
+            for (ParkingLotOwnerObserver parkingLotOwnerObserver : parkingLotOwnerObservers) {
+                parkingLotOwnerObserver.updateWhenParkingLotIsAvailable();
+            }
         }
     }
 
-    public boolean isFull(){
+    public boolean isParkingSpaceFull(){
         if(parkedCars.size()==this.size){
             return true;
         }
         return false;
+    }
+
+    public void attachFBIAgentObserver(FBIAgenetObserver fbiAgenetObserver) {
+        fbiAgenetObservers.add(fbiAgenetObserver);
     }
 }

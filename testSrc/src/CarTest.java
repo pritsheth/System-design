@@ -27,7 +27,7 @@ public class CarTest {
     @Test
     public void shouldGetSameRegistrationIdOfCreatedCar()throws Exception{
         Car car = new Car(2);
-        Assert.assertEquals(car.getregistrationNumber(),2);
+        Assert.assertEquals(car.getRegistrationNumber(),2);
 
     }
 

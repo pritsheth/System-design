@@ -1,21 +1,24 @@
-import java.util.Observable;
-import java.util.Observer;
+import observers.ParkingLotOwnerObserver;
 
-/**
- * Created by Jerry on 22-04-2015.
- */
-public class ParkingLotOwner implements Observer {
+public class ParkingLotOwner implements ParkingLotOwnerObserver {
 
     private final String name;
 
-    ParkingLotOwner(String name) {
+    ParkingLotOwner(String name) throws Exception {
+
+        if(name==null){
+            throw new Exception("Owner with No Name");
+        }
         this.name = name;
+    }
+
+    @Override
+    public void updateWhenParkingLotIsFull() {
 
     }
 
-
     @Override
-    public void update(Observable o, Object arg) {
-        System.out.println(arg);
+    public void updateWhenParkingLotIsAvailable() {
+
     }
 }

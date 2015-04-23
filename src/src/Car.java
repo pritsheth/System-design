@@ -18,7 +18,7 @@ public class Car {
     }
 
 
-    public int getregistrationNumber(){
+    public int getRegistrationNumber(){
         return this.registrationNumber;
     }
 
