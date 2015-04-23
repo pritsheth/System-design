@@ -10,6 +10,8 @@ import java.util.List;
 public class ParkingLot {
 
     private static final Float percent = 0.8f;
+
+
     private final int size;
 
 
@@ -98,6 +100,10 @@ public class ParkingLot {
 
     public void attachFBIAgentObserver(FBIAgenetObserver fbiAgenetObserver) {
         fbiAgenetObservers.add(fbiAgenetObserver);
+    }
+
+    public int getSize() {
+        return size;
     }
 
 

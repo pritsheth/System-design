@@ -21,14 +21,15 @@ public class ParkingAttendant {
             if (!parkingLot.isParkingSpaceFull()) {
                 return parkingLot;
             }
-
         }
         return null;
     }
 
+
+
     public Car findCarForParticularTicket(Integer ticket) throws Exception {
 
-        System.out.println("enter");
+
         for (ParkingLot parkingLot : parkingLots) {
             HashMap<Integer, Car> parkedCar= parkingLot.getParkedCars();
             if(parkedCar.containsKey(ticket)) {
@@ -39,6 +40,18 @@ public class ParkingAttendant {
         }
 
 
+    public ParkingLot findParkingLotWithMaximumSize() {
+        Integer maximum=Integer.MIN_VALUE;
+        ParkingLot parkingLotResult=null;
+        for (ParkingLot parkingLot : parkingLots) {
+            if(maximum <parkingLot.getSize() && !parkingLot.isParkingSpaceFull()){
+                parkingLotResult=parkingLot;
+                maximum=parkingLot.getSize();
+            }
 
+        }
+  return parkingLotResult;
+
+    }
 }
 

@@ -99,4 +99,6 @@ public class ParkingLotTest {
         verify(fbiAgenetObservert, times(1)).updateWhenSpaceIs80PercentFull();
     }
 
+
+
 }
