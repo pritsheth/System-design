@@ -14,12 +14,11 @@ private ParkingAttendant parkingAttendant;
         this.name = name;
     }
 
-    @Override
     public void updateWhenParkingLotIsFull() {
 
     }
 
-    @Override
+
     public void updateWhenParkingLotIsAvailable() {
 
     }

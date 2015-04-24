@@ -26,31 +26,32 @@ public class ParkingAttendant {
     }
 
     public Car findCarForParticularTicket(Integer ticket) throws Exception {
-
-
         for (ParkingLot parkingLot : parkingLots) {
-            HashMap<Integer, Car> parkedCar= parkingLot.getParkedCars();
-            if(parkedCar.containsKey(ticket)) {
+            HashMap<Integer, Car> parkedCar = parkingLot.getParkedCars();
+            if (parkedCar.containsKey(ticket)) {
                 return parkingLot.unParkCar(ticket);
             }
         }
         return null;
-        }
+    }
 
 
     private ParkingLot findParkingLotWithMaximumSize() {
-        Integer maximum=Integer.MIN_VALUE;
-        ParkingLot parkingLotResult=null;
+        Integer maximum = Integer.MIN_VALUE;
+        ParkingLot parkingLotResult = null;
         for (ParkingLot parkingLot : parkingLots) {
-            if(maximum <parkingLot.getSize() && !parkingLot.isParkingSpaceFull()){
-                parkingLotResult=parkingLot;
-                maximum=parkingLot.getSize();
+            if (maximum < parkingLot.getSize() && !parkingLot.isParkingSpaceFull()) {
+                parkingLotResult = parkingLot;
+                maximum = parkingLot.getSize();
             }
 
         }
-  return parkingLotResult;
+        System.out.println(parkingLotResult.getSize());
+        return parkingLotResult;
 
     }
+
+
 
 
 }

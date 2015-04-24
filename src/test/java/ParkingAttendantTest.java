@@ -24,15 +24,14 @@ public class ParkingAttendantTest {
         ParkingAttendant parkingAttendant = new ParkingAttendant(parkingLots);
         ParkingLot parkingLotResult = parkingAttendant.findParkingLot();
         assertEquals(parkingLotResult, parkingLotA);
-
     }
 
     @Test
-    public void findParkingLotWhichHasSpaceIfFestiveSeason() throws Exception {
+    public void findParkingLotForFestiveSeason() throws Exception {
 
         ParkingLot parkingLotA = new ParkingLot(2);
         ParkingLot parkingLotB = new ParkingLot(4);
-        ArrayList<ParkingLot> parkingLots = new ArrayList<>();
+        ArrayList<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
         parkingLots.add(parkingLotA);
         parkingLots.add(parkingLotB);
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner("amss");
@@ -40,7 +39,6 @@ public class ParkingAttendantTest {
         ParkingAttendant parkingAttendant = new ParkingAttendant(parkingLots);
         ParkingLot parkingLot = parkingAttendant.findParkingLot();
         assertEquals(parkingLot, parkingLotB);
-
     }
 
     @Test

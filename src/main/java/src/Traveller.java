@@ -9,7 +9,6 @@ public class Traveller {
     private Integer ticket;
 
     public Traveller(int id, Car car) throws Exception {
-
         validateTravellerId(id);
         validateCar(car);
         this.id = id;
@@ -30,8 +29,6 @@ public class Traveller {
 
 
     public Boolean parkMyCar(ParkingAttendant parkingAttendant) {
-
-
         try {
             ParkingLot parkingLot = parkingAttendant.findParkingLot();
 
